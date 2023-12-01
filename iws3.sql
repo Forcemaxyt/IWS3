@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2023 a las 20:27:52
--- Versión del servidor: 10.4.27-MariaDB
--- Versión de PHP: 8.2.0
+-- Tiempo de generación: 01-12-2023 a las 10:07:51
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,17 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `iws3`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bancos`
+--
+
+CREATE TABLE `bancos` (
+  `id_banco` int(11) NOT NULL,
+  `Nombre_banco` varchar(244) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -50,6 +61,34 @@ CREATE TABLE `cliente` (
   `Telefono` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`ID`, `NombreEmpresa`, `PersonaContacto`, `Direccion`, `Telefono`) VALUES
+(1, 'harold ya desperto', '432234', 'barrio peligroso', '3443223');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuentas`
+--
+
+CREATE TABLE `cuentas` (
+  `id_cuenta` int(11) NOT NULL,
+  `Tipo_cuenta` varchar(244) NOT NULL,
+  `numero_cuenta` varchar(244) NOT NULL,
+  `nombre_banco` varchar(244) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cuentas`
+--
+
+INSERT INTO `cuentas` (`id_cuenta`, `Tipo_cuenta`, `numero_cuenta`, `nombre_banco`) VALUES
+(1, 'ahorros', '2334444', 'DAVIVIENDA'),
+(3, 'ahor', '123', 'bogotaaa');
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +117,14 @@ CREATE TABLE `empleado` (
   `Cargo` varchar(50) DEFAULT NULL,
   `Departamento` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `empleado`
+--
+
+INSERT INTO `empleado` (`ID`, `Nombre`, `Apellido`, `Cargo`, `Departamento`) VALUES
+(2, 'sfg', 'efg', 'f', 'dd'),
+(3, 'harold smithh', 'Carmona mendez', 'gobernante', 'en sus sueños');
 
 -- --------------------------------------------------------
 
@@ -113,6 +160,39 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gastos`
+--
+
+CREATE TABLE `gastos` (
+  `id_gastos` int(11) NOT NULL,
+  `Concepto` varchar(244) NOT NULL,
+  `Pago` int(11) NOT NULL,
+  `Fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ingresos`
+--
+
+CREATE TABLE `ingresos` (
+  `id_ingreso` int(11) NOT NULL,
+  `Concepto` varchar(245) NOT NULL,
+  `Valor` int(11) NOT NULL,
+  `Fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ingresos`
+--
+
+INSERT INTO `ingresos` (`id_ingreso`, `Concepto`, `Valor`, `Fecha`) VALUES
+(1, 'compra cualquiera ', 1234444, '2023-11-30');
 
 -- --------------------------------------------------------
 
@@ -262,7 +342,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `rol`) VALUES
-(2, 'Force', 'forcemax09@gmail.com', NULL, '$2y$12$28V/LSHzuKvulRopXf7dsu92kk5BCvsk4LkgUc9/0i4//qeFuVrOi', NULL, '2023-11-30 00:21:13', '2023-11-30 00:21:13', 'administrador');
+(2, 'Force', 'forcemax09@gmail.com', NULL, '$2y$12$28V/LSHzuKvulRopXf7dsu92kk5BCvsk4LkgUc9/0i4//qeFuVrOi', NULL, '2023-11-30 00:21:13', '2023-11-30 00:21:13', 'administrador'),
+(4, 'Juan Sebastian Calderon G', 'jsebasgaleano@gmail.com', NULL, '$2y$12$QTrFTdb/vEm5ZkZ.KdulZ.Tu1eIKjucN5T68XNJck6xQBbz9/NKfW', NULL, '2023-12-01 07:54:43', '2023-12-01 07:54:43', '2'),
+(5, 'harold', 'harold@gmil.com', NULL, '$2y$12$b.N13uzvbj7Ghuv7L3dQ7uZBNcd14wiZVoRzk0WARIPiE87eNMl7G', NULL, '2023-12-01 13:05:16', '2023-12-01 13:05:16', '3');
 
 -- --------------------------------------------------------
 
@@ -279,8 +361,21 @@ CREATE TABLE `venta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `venta`
+--
+
+INSERT INTO `venta` (`ID`, `FechaVenta`, `ClienteAsociado`, `TotalVenta`, `id_estado_fk`) VALUES
+(1, '2023-11-30', 1, 23434, 1);
+
+--
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `bancos`
+--
+ALTER TABLE `bancos`
+  ADD PRIMARY KEY (`id_banco`);
 
 --
 -- Indices de la tabla `cambios_stock`
@@ -293,6 +388,12 @@ ALTER TABLE `cambios_stock`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `cuentas`
+--
+ALTER TABLE `cuentas`
+  ADD PRIMARY KEY (`id_cuenta`);
 
 --
 -- Indices de la tabla `detallesventa`
@@ -320,6 +421,18 @@ ALTER TABLE `estado_venta`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indices de la tabla `gastos`
+--
+ALTER TABLE `gastos`
+  ADD PRIMARY KEY (`id_gastos`);
+
+--
+-- Indices de la tabla `ingresos`
+--
+ALTER TABLE `ingresos`
+  ADD PRIMARY KEY (`id_ingreso`);
 
 --
 -- Indices de la tabla `migrations`
@@ -387,6 +500,12 @@ ALTER TABLE `venta`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `bancos`
+--
+ALTER TABLE `bancos`
+  MODIFY `id_banco` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `cambios_stock`
 --
 ALTER TABLE `cambios_stock`
@@ -396,7 +515,13 @@ ALTER TABLE `cambios_stock`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `cuentas`
+--
+ALTER TABLE `cuentas`
+  MODIFY `id_cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `detallesventa`
@@ -408,7 +533,7 @@ ALTER TABLE `detallesventa`
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `estado_venta`
@@ -421,6 +546,18 @@ ALTER TABLE `estado_venta`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `gastos`
+--
+ALTER TABLE `gastos`
+  MODIFY `id_gastos` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `ingresos`
+--
+ALTER TABLE `ingresos`
+  MODIFY `id_ingreso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -462,13 +599,13 @@ ALTER TABLE `tiempo_fuera`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`
 --
 ALTER TABLE `venta`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
